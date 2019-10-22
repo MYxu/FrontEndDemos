@@ -14,11 +14,13 @@ function navBarSwitch(key) {
     loadingAnimateContainerEl.fadeIn(500);
 
     contentContainerEl.load(contentList[key], function () {
-        loadingAnimateContainerEl.fadeOut(2000);
         setTimeout(function () {
-            contentContainerEl.css('min-height', middleContainerMinHeight + 'px');
-            contentContainerEl.fadeIn(500);
-            console.log('页面切换成功');
-        }, 2000)
+            loadingAnimateContainerEl.fadeOut(500, function () {
+                loadingAnimateContainerEl.hide();
+                contentContainerEl.css('min-height', middleContainerMinHeight + 'px');
+                contentContainerEl.fadeIn(500);
+                console.log('页面切换成功');
+            });
+        }, 10000)
     });
 }

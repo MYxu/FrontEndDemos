@@ -26,7 +26,7 @@
         <div class="loading-animate-container">
             <div id="loading-animate-1"></div>
         </div>
-        <div class="content-container" style="display: none"></div>
+        <div class="content-container" style="display: none;"></div>
     </div>
     <script>
         // $('.middle-container').css('min-height', (window.innerHeight - 200) + 'px');
@@ -43,13 +43,14 @@
             console.log('resize')
         };
         contentContainerEl.load('home.html', function () {
-            $('.loading-animate-container').fadeOut(2000);
             setTimeout(function () {
-                let contentContainerElement = $('.content-container');
-                contentContainerElement.css('min-height', (window.innerHeight - 200) + 'px');
-                contentContainerElement.fadeIn(500);
-                console.log('加载首页内容成功');
-            }, 2000);
+                $('.loading-animate-container').fadeOut(2000, function () {
+                    let contentContainerElement = $('.content-container');
+                    contentContainerElement.css('min-height', (window.innerHeight - 200) + 'px');
+                    contentContainerElement.fadeIn(500);
+                    console.log('加载首页内容成功');
+                });
+            }, 5000)
         })
     </script>
 
