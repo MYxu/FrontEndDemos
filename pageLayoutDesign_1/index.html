@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!--加载页面适配设置js-->
+    <script src="asset/js/pageAdapterSettings.js"></script>
+    <script src="extend/jquery-3.4.1.js"></script>
+    <script src="asset/js/index.js"></script>
+    <link rel="stylesheet" href="asset/css/index.css">
+    <link rel="stylesheet" href="asset/css/customAnimate/loading.css">
+</head>
+<body>
+<div class="container">
+    <!--头部信息展示区域-->
+    <div class="header-container">
+        <div class="nav-list">
+            <button onclick="navBarSwitch('home')">首页</button>
+            <button onclick="navBarSwitch('gameCenter')">游戏中心</button>
+        </div>
+    </div>
+
+
+    <!--中间内容展示区域-->
+    <div class="middle-container" style="background-color: whitesmoke">
+        <div class="loading-animate-container">
+            <div id="loading-animate-1"></div>
+        </div>
+        <div class="content-container" style="display: none"></div>
+    </div>
+    <script>
+        // $('.middle-container').css('min-height', (window.innerHeight - 200) + 'px');
+        // $('.loading-animate-container').css('min-height', (window.innerHeight - 200) + 'px');
+        let middleContainerMinHeight = window.innerHeight - 200,
+            loadingAnimateContainerEl = $('.loading-animate-container'),
+            contentContainerEl = $('.content-container');
+
+        loadingAnimateContainerEl.css('min-height', middleContainerMinHeight + 'px');
+        contentContainerEl.css('min-height', middleContainerMinHeight + 'px');
+        window.onresize = function() {
+            $('.loading-animate-container').css('min-height', (window.innerHeight - 200) + 'px');
+            $('.content-container').css('min-height', middleContainerMinHeight + 'px');
+            console.log('resize')
+        };
+        contentContainerEl.load('home.html', function () {
+            $('.loading-animate-container').fadeOut(2000);
+            setTimeout(function () {
+                let contentContainerElement = $('.content-container');
+                contentContainerElement.css('min-height', (window.innerHeight - 200) + 'px');
+                contentContainerElement.fadeIn(500);
+                console.log('加载首页内容成功');
+            }, 2000);
+        })
+    </script>
+
+
+    <!--底部信息展示区域-->
+    <div class="footer-container">底部信息</div>
+</div>
+</body>
+</html>
