@@ -5,7 +5,3 @@ const baseUrl = window.location.href.slice(0, window.location.href.lastIndexOf('
 const assetBaseUrl = baseUrl + '/asset';
 const cssBaseUrl = assetBaseUrl + '/css';
 const jsBaseUrl = assetBaseUrl + '/js';
-
-
-// 静态资源文件的更新版本
-const version = 2;

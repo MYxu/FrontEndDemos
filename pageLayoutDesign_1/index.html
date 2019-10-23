@@ -2,27 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>页面布局1</title>
     <!--加载页面适配设置js-->
     <script src="asset/js/pageAdapterSettings.js"></script>
     <script src="extend/jquery-3.4.1.js"></script>
     <script src="asset/js/index.js"></script>
     <script src="asset/js/const.js"></script>
+
+    <!--const.js文件中定义了静态资源的版本号，因此这个文件-->
+    <!--<script>-->
+        <!--$.getScript('asset/js/const.js')-->
+    <!--// </script>-->
+    <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="asset/css/index.css">
     <link rel="stylesheet" href="asset/css/customAnimate/loading.css">
 </head>
 <body>
 <div class="container">
-    <!--头部信息展示区域-->
+    <!--1.头部信息展示区域 start-->
     <div class="header-container">
         <div class="nav-list">
             <button onclick="navBarSwitch('home')">首页</button>
             <button onclick="navBarSwitch('gameCenter')">游戏中心</button>
         </div>
     </div>
+    <!--1.头部信息展示区域 end-->
 
 
-    <!--中间内容展示区域: 头部的导航栏切换时动态加载不同的页面内容-->
+    <!--2.中间内容展示区域 start: 头部的导航栏切换时动态加载不同的页面内容-->
     <div class="middle-container">
         <div class="loading-animate-container">
             <div id="loading-animate-1"></div>
@@ -34,19 +41,31 @@
             loadingAnimateContainerEl = $('.loading-animate-container'),
             contentContainerEl = $('.content-container');
 
+        // 设置中间区域的内容加载动画容器、内容展示容器的最小高度
         loadingAnimateContainerEl.css('min-height', middleContainerMinHeight + 'px');
         contentContainerEl.css('min-height', middleContainerMinHeight + 'px');
+
+        // 监听窗口高度变化，动态调整最小高度
         window.onresize = function() {
             $('.loading-animate-container').css('min-height', (window.innerHeight - 200) + 'px');
             $('.content-container').css('min-height', middleContainerMinHeight + 'px');
             console.log('resize')
         };
-        navBarSwitch('home');
+
+        // 获取本地存储的当前导航栏key值，若没有则默认加载首页
+        // 这样做是为了解决页面刷新的时候全部默认加载首页了
+        console.log(window.localStorage.getItem('currNavKey'));
+        let currNavKey = window.localStorage.getItem('currNavKey');
+        if (currNavKey === null) {
+            currNavKey = 'home';
+        }
+        navBarSwitch(currNavKey)
     </script>
+    <!--2.中间内容展示区域 end-->
 
-
-    <!--底部信息展示区域-->
+    <!--3.底部信息展示区域 start-->
     <div class="footer-container">底部信息</div>
+    <!--3.底部信息展示区域 end-->
 </div>
 </body>
 </html>
