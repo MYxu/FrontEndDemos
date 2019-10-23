@@ -4,17 +4,17 @@ function navBarSwitch(currNavKey) {
         loadingAnimateContainerEl = $('.loading-animate-container'),
         contentContainerEl = $('.content-container');
 
-    let contentList = {
-        home: 'home.html',
-        gameCenter: 'gameCenter.html'
-    };
-    let scriptList = {
-        home: jsBaseUrl + 'home.js',
-        gameCenter: jsBaseUrl + 'gameCenter.js'
-    };
-    let linkList = {
-        home: cssBaseUrl + 'home.css',
-        gameCenter: cssBaseUrl + 'gameCenter.css'
+    let dynamicImportFileList = {
+        home: {
+            content: baseUrl + '/home.html',
+            js: [jsBaseUrl + '/home.js'],
+            css: [cssBaseUrl + '/home.css']
+        },
+        gameCenter: {
+            content: baseUrl + '/gameCenter.html',
+            js: [jsBaseUrl + '/gameCenter.js'],
+            css: [cssBaseUrl + '/gameCenter.css']
+        }
     };
 
     contentContainerEl.hide();
@@ -22,11 +22,11 @@ function navBarSwitch(currNavKey) {
     loadingAnimateContainerEl.fadeIn(500);
 
     // 加载对应的js、css文件
-    console.log(importJs(scriptList[currNavKey]));
-    console.log(importCss(linkList[currNavKey]));
+    console.log(importJs(dynamicImportFileList[currNavKey]['js'][0]));
+    console.log(importCss(dynamicImportFileList[currNavKey]['css'][0]));
 
     // 加载页面结构
-    contentContainerEl.load(contentList[currNavKey], function () {
+    contentContainerEl.load(dynamicImportFileList[currNavKey]['content'], function () {
         // 模拟3s后获取到页面内容信息
         setTimeout(function () {
             loadingAnimateContainerEl.fadeOut(500, function () {
@@ -56,6 +56,11 @@ function importJs(fileSrc = '') {
     return true;
 }
 
+/**
+ * 动态加载指定的css文件
+ * @param fileSrc
+ * @returns {boolean}
+ */
 function importCss(fileSrc = '') {
     console.log(fileSrc);
     let linkElementList = $('link');
