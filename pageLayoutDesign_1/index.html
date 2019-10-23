@@ -7,6 +7,7 @@
     <script src="asset/js/pageAdapterSettings.js"></script>
     <script src="extend/jquery-3.4.1.js"></script>
     <script src="asset/js/index.js"></script>
+    <script src="asset/js/const.js"></script>
     <link rel="stylesheet" href="asset/css/index.css">
     <link rel="stylesheet" href="asset/css/customAnimate/loading.css">
 </head>
@@ -21,16 +22,14 @@
     </div>
 
 
-    <!--中间内容展示区域-->
-    <div class="middle-container" style="background-color: whitesmoke">
+    <!--中间内容展示区域: 头部的导航栏切换时动态加载不同的页面内容-->
+    <div class="middle-container">
         <div class="loading-animate-container">
             <div id="loading-animate-1"></div>
         </div>
         <div class="content-container" style="display: none;"></div>
     </div>
     <script>
-        // $('.middle-container').css('min-height', (window.innerHeight - 200) + 'px');
-        // $('.loading-animate-container').css('min-height', (window.innerHeight - 200) + 'px');
         let middleContainerMinHeight = window.innerHeight - 200,
             loadingAnimateContainerEl = $('.loading-animate-container'),
             contentContainerEl = $('.content-container');
@@ -42,16 +41,7 @@
             $('.content-container').css('min-height', middleContainerMinHeight + 'px');
             console.log('resize')
         };
-        contentContainerEl.load('home.html', function () {
-            setTimeout(function () {
-                $('.loading-animate-container').fadeOut(2000, function () {
-                    let contentContainerElement = $('.content-container');
-                    contentContainerElement.css('min-height', (window.innerHeight - 200) + 'px');
-                    contentContainerElement.fadeIn(500);
-                    console.log('加载首页内容成功');
-                });
-            }, 5000)
-        })
+        navBarSwitch('home');
     </script>
 
 

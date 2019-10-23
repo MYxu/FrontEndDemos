@@ -30,6 +30,7 @@ body {
 
 .middle-container {
     width: 100%;
+    background-color: whitesmoke;
     /*js动态设置min-height*/
 }
 .loading-animate-container {
