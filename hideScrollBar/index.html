@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    html, body {
+        padding: 0;
+        margin: 0;
+    }
+    #app, body, html {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+    #wrapper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    #header {
+        width: 100%;
+        height: 70px;
+        position: fixed;
+        border-bottom: 1px solid whitesmoke;
+    }
+    #middle {
+        height: 100%;
+        width: 100%;
+
+    }
+    #sidebar {
+        width: 200px;
+        height: 100%;
+        position: fixed;
+        top: 70px;
+        border-right: 1px solid whitesmoke;
+    }
+    #content {
+        /*width: 80%;*/
+        height: 100%;
+        margin-left: 200px;
+        padding: 70px 0 0 0;
+        box-sizing: border-box;
+        background-color: white;
+    }
+    .list {
+        width: 100%;
+        height: 100%;
+        /* 当子元素高度超出父级元素高度时，子元素会撑开父级元素，页面自动出现滚动条*/
+        overflow: auto;
+
+        /* 这里很重要，设置padding-right实现页面内容区域可以滚动但窗口不会出现滚动条
+         * 原理就是通过设置padding-right撑开元素的宽度，从而将右边的滚动条顶出视图窗口
+         * 可以通过F12调试慢慢减少padding-right的值你就会发现滚动条了
+         */
+        padding-right: 30px;
+    }
+    .item {
+        width: 100%;
+        height: 300px;
+        border: 1px solid whitesmoke;
+        display: flex;
+        align-items: flex-end;;
+    }
+</style>
+<body>
+<div id="app">
+    <div id="wrapper">
+        <header id="header">头部</header>
+        <div id="middle">
+            <aside id="sidebar">侧边栏</aside>
+            <div id="content">
+                <div class="list">
+                    <div class="item">1</div>
+                    <div class="item">2</div>
+                    <div class="item">3</div>
+                    <div class="item">4</div>
+                    <div class="item">5</div>
+                    <div class="item">6</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
